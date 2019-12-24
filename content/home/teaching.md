@@ -7,7 +7,7 @@ headless = true  # This file represents a page section.
 active = true  # Activate this widget? true/false
 weight = 60  # Order that this section will appear.
 
-title = "Recent Posts"
+title = "Teaching"
 subtitle = ""
 
 [content]
@@ -36,7 +36,7 @@ subtitle = ""
   #   2 = Compact
   #   3 = Card
   #   4 = Citation (publication only)
-  view = 2
+  view = 1
   
 [design.background]
   # Apply a background color, gradient, or image.
@@ -65,3 +65,30 @@ subtitle = ""
  # CSS class.
  css_class = ""
 +++
+
+
+*  *Teaching Assistant*, **STAT/CSSS 536: Analysis of Cateorical and Count data** (Autumn'19) <br>
+*Instructor:* {{% staticref "https://www.stat.washington.edu/adobra/" "newtab" %}}Prof. Adrian Dobra{{% /staticref %}}, University of Washington Seattle
+
+
+
+*  *Teaching Assistant*, **STAT220: Statistical Reasoning** (Summer'19) <br>
+    *Instructor:*  Anne Wagner, University of Washington Seattle
+
+
+*  *Teaching Assistant*, **STAT220: Statistical Reasoning** (Winter'19) <br>
+      *Instructor:*  Mark Calogero, University of Washington Seattle
+
+
+*  *Teaching Assistant*, **STAT/CSSS 509/ ECON 580: Econometrics I - Introduction to Mathematical Statistics** (Autumn'18) <br>
+  *Instructor:* {{% staticref "https://www.stat.washington.edu/tsr/website/inquiry/home.php" "newtab" %}}Prof. Thomas S. Richardson{{% /staticref %}}, University of Washington Seattle
+
+
+*  *Teaching Assistant*, **MTH418A : Statistical Inference** (Spring'17) <br>
+  *Instructor:* {{% staticref "http://home.iitk.ac.in/~amitra/" "newtab" %}}Prof. Amit Mitra{{% /staticref %}}, Indian Institute of Technology Kanpur
+ 
+
+
+*  *Senior Academic Mentor*, **Counselling Service, IIT Kanpur** (2014-15) <br>
+
+   * Organized remedial classes and provided peer-to-peer mentorship to academically deficient students of the department.
