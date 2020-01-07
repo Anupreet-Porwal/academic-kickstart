@@ -66,6 +66,9 @@ subtitle = ""
  css_class = ""
 +++
 
+*  *Teaching Assistant*, **STAT 341: Introduction To Probability And Mathematical Statistics II** (Winter'20) <br>
+*Instructor:* {{% staticref "https://www.stat.washington.edu/people/grover4/" "newtab" %}}Prof. Ranjini Grove{{% /staticref %}}, University of Washington Seattle
+
 
 *  *Teaching Assistant*, **STAT/CSSS 536: Analysis of Cateorical and Count data** (Autumn'19) <br>
 *Instructor:* {{% staticref "https://www.stat.washington.edu/adobra/" "newtab" %}}Prof. Adrian Dobra{{% /staticref %}}, University of Washington Seattle

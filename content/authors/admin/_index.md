@@ -14,7 +14,7 @@ role: PhD student
 
 # Organizations/Affiliations
 organizations:
-- name: University of Washington
+- name: University of Washington Seattle
   url: ""
 
 # Short bio (displayed in user profile at end of posts)
@@ -28,7 +28,7 @@ interests:
 education:
   courses:
   - course: PhD in Statistics
-    institution: University of Washington
+    institution: University of Washington Seattle
   - course: B.S.-M.S. in Mathematics and Scientific Computing
     institution: Indian Institute of Technology Kanpur
     year: 2017
@@ -70,9 +70,11 @@ social:
 #- Visitors
 ---
 
-I am a PhD student in the {{% staticref "https://www.stat.washington.edu/" "newtab" %}}Department of Statistics{{% /staticref %}} at the University of Washington. I am broadly interested in Bayesian Machine Learning and Statistical Modelling Techniques. Before coming to UW, I worked as an analyst with North American Liability Strategies team in {{% staticref "https://deutschebank.co.in/" "newtab" %}}Deutsche Bank (DB){{% /staticref %}}. At DB, I advised North American corporate clients on their liability strategies including liability management, capital structure analysis, ratings and pension advisory.
+I am a PhD student in the {{% staticref "https://www.stat.washington.edu/" "newtab" %}}Department of Statistics{{% /staticref %}} at the University of Washington. I am broadly interested in Bayesian Machine Learning and Statistical Modelling Techniques. Currently, I am working with {{% staticref "https://www.stat.washington.edu/people/raftery/" "newtab" %}}Prof. Adrian Raftery{{% /staticref %}} on exploration and comparison of various variable selection techniques in linear regression setting. 
 
-I did my bachelors and masters in Mathematics and Scientific Computing from Indian Institute of Technology Kanpur in 2017 where I was fortunate to work with {{% staticref "http://home.iitk.ac.in/~kundu/kundu.html" "newtab" %}}Prof. Debasis Kundu{{% /staticref %}}, {{% staticref "http://home.iitk.ac.in/~amitra/" "newtab" %}}Prof. Amit Mitra{{% /staticref %}} and {{% staticref "https://www.cse.iitk.ac.in/users/piyush/" "newtab" %}}Prof. Piyush Rai{{% /staticref %}}. During my stay at IIT Kanpur, I have developed a strong skill set in areas of Bayesian Machine Learning and Statistical Modelling Techniques and their applications to everyday life.
+Before coming to UW, I worked as an analyst with North American Liability Strategies team in {{% staticref "https://deutschebank.co.in/" "newtab" %}}Deutsche Bank (DB){{% /staticref %}}. At DB, I advised North American corporate clients on their liability strategies including liability management, capital structure analysis, ratings and pension advisory.
+
+I did my bachelors and masters in Mathematics and Scientific Computing from Indian Institute of Technology Kanpur in 2017 where I was fortunate to work with {{% staticref "http://home.iitk.ac.in/~kundu/kundu.html" "newtab" %}}Prof. Debasis Kundu{{% /staticref %}}, {{% staticref "http://home.iitk.ac.in/~amitra/" "newtab" %}}Prof. Amit Mitra{{% /staticref %}} and {{% staticref "https://www.cse.iitk.ac.in/users/piyush/" "newtab" %}}Prof. Piyush Rai{{% /staticref %}}. 
 
 You can find my resume {{% staticref "files/resources/cv_anupreet_3page_webpage.pdf" "newtab" %}}here{{% /staticref %}}.
 
