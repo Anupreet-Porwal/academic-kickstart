@@ -22,7 +22,7 @@ organizations:
 
 interests:
 - Statistical Modelling Techniques
-- Regression Analysis, Time Series Analysis
+- Bayesian Model Selection, Bayesian Models for sparsity
 - Probabilistic Machine Learning, Bayesian Statistics
 
 education:
@@ -58,7 +58,7 @@ social:
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
 - icon: cv
   icon_pack: ai
-  link: files/resources/cv_anupreet_3page_webpage.pdf
+  link: files/resources/Resume_Anupreet_Porwal_Jan2021.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 #email: ""
@@ -70,11 +70,12 @@ social:
 #- Visitors
 ---
 
-I am a PhD student in the {{% staticref "https://www.stat.washington.edu/" "newtab" %}}Department of Statistics{{% /staticref %}} at the University of Washington. I am broadly interested in Bayesian Machine Learning and Statistical Modelling Techniques. Currently, I am working with {{% staticref "https://www.stat.washington.edu/people/raftery/" "newtab" %}}Prof. Adrian Raftery{{% /staticref %}} on exploration and comparison of various variable selection techniques in linear regression setting. 
+I am a PhD student in the {{% staticref "https://www.stat.washington.edu/" "newtab" %}}Department of Statistics{{% /staticref %}} at the University of Washington. I am broadly interested in Bayesian Machine Learning and Statistical Modelling Techniques. Currently, I am working with {{% staticref "https://www.stat.washington.edu/people/raftery/" "newtab" %}}Prof. Adrian Raftery{{% /staticref %}} on extensive comparsion of Bayesian Model Averaging techniques vs. Penalize likelihood based techniques for Variable selection over real datasets. I am also working with {{% staticref "https://stat.uw.edu/about-us/people/abel-rodriguez" "newtab" %}}Prof. Abel Rodriguez{{% /staticref %}} to develop Laplace Power expected Posterior priors for Logistic models. 
 
 Before coming to UW, I worked as an analyst with North American Liability Strategies team in {{% staticref "https://deutschebank.co.in/" "newtab" %}}Deutsche Bank (DB){{% /staticref %}}. At DB, I advised North American corporate clients on their liability strategies including liability management, capital structure analysis, ratings and pension advisory.
 
 I did my bachelors and masters in Mathematics and Scientific Computing from Indian Institute of Technology Kanpur in 2017 where I was fortunate to work with {{% staticref "http://home.iitk.ac.in/~kundu/kundu.html" "newtab" %}}Prof. Debasis Kundu{{% /staticref %}}, {{% staticref "http://home.iitk.ac.in/~amitra/" "newtab" %}}Prof. Amit Mitra{{% /staticref %}} and {{% staticref "https://www.cse.iitk.ac.in/users/piyush/" "newtab" %}}Prof. Piyush Rai{{% /staticref %}}. 
 
-You can find my resume {{% staticref "files/resources/cv_anupreet_3page_webpage.pdf" "newtab" %}}here{{% /staticref %}}.
+You can find my resume {{% staticref "files/resources/Resume_Anupreet_Porwal_Jan2021.pdf
+" "newtab" %}}here{{% /staticref %}}.
 
