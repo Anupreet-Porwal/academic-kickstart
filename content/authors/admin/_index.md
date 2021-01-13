@@ -76,6 +76,5 @@ Before coming to UW, I worked as an analyst with North American Liability Strate
 
 I did my bachelors and masters in Mathematics and Scientific Computing from Indian Institute of Technology Kanpur in 2017 where I was fortunate to work with {{% staticref "http://home.iitk.ac.in/~kundu/kundu.html" "newtab" %}}Prof. Debasis Kundu{{% /staticref %}}, {{% staticref "http://home.iitk.ac.in/~amitra/" "newtab" %}}Prof. Amit Mitra{{% /staticref %}} and {{% staticref "https://www.cse.iitk.ac.in/users/piyush/" "newtab" %}}Prof. Piyush Rai{{% /staticref %}}. 
 
-You can find my resume {{% staticref "files/resources/Resume_Anupreet_Porwal_Jan2021.pdf
-" "newtab" %}}here{{% /staticref %}}.
+You can find my resume {{% staticref "files/resources/Resume_Anupreet_Porwal_Jan2021.pdf" "newtab" %}}here{{% /staticref %}}.
 
