@@ -1,0 +1,236 @@
+library(caret)      # install.packages('caret', dependencies = c("Depends", "Suggests"))
+library(mlbench)
+library(MASS)
+library(plyr)
+library(PRROC)
+library(glmnet)
+library(BAS)
+library(plyr)
+library(testit)
+
+#setwd("C:/Users/Anupreet Porwal/Dropbox/Research/PEP-GLM/code")
+
+load("data/simulation1_logistic_data.rda")
+source("main/LaplacePEP_MCMC_ModelPrior_deltaPrior_010421.R")
+#source("PEPs/crpep_function_AP.R")
+#source("PEPs/drpep_function_AP.R")
+
+set.seed(8)
+
+args = commandArgs(TRUE)
+
+samp <- 100
+
+pep.predict.model <- function(gamsamp,estimator="HPM"){
+  if(estimator=="HPM"){
+    mod.sum <- count(as.data.frame(gamsamp), vars = colnames(gamsamp))
+    map.mod <- mod.sum[which.max(mod.sum$freq),-ncol(mod.sum)]
+  }
+  return(map.mod)
+}
+
+# ## Covariance matrix for correlated X
+# Sigma = matrix(NA, nr = p, nc = p);
+# for(k in 1:p){
+#   for(l in 1:p){
+#     Sigma[k,l] = 0.75^(abs(k-l));
+#   }
+# }
+
+map.count <- matrix(0, nrow=samp,ncol = 11)
+colnames(map.count) <- c("LPEP-BB-G1","LPEP-U-G1","LPEP-BB-G4","LPEP-U-G4","LPEP-BB-hyperg",
+                         "LPEP-U-hyperg","LASSO","UIP", "hyper-g","hyper-g/n a=3",
+                         "hyper-g/n a=4")#,"CR PEP","CR PEP hyper-g","CR PEP hyper-g/n a=4",
+#"DR PEP", "DR PEP hyper-g","DR PEP hyper-g/n a=4")
+
+i= as.numeric(args[1]) ## different betatrue: 1:Null; 2:Sparse; 3:Medium ;4: Full
+j= as.numeric(args[2])## 1: indepdent X; 2: correlated X, rho = 0.75
+
+
+for(r in 1:samp){ ## for each scenario, generate 100 datasets
+  #r = 1;
+  print(paste0("Iteration no:",r))
+
+  ind = (2 * (i - 1) + j - 1) * 100 + r;
+
+  X = X.full[[ind]][, 1:p];
+  y = y.full[[ind]];
+  sim.data <- as.data.frame(cbind(X,y))
+  true.gam <- (abs(Betatrue[i, -1])>0)
+
+  c <- 1
+  print("----------------mod1------------")
+  # Laplace PEP
+  mod1 <- Laplace.pep(X,y,nmc=5000,burn=2000, model.prior = "beta-binomial", hyper="TRUE", hyper.type="gamma",hyper.param=1)
+
+  # colnames(LapPEP.fit$GammaSamples)=paste("V",1:5,sep="")
+  # # Count the unique models and their counts
+  # mod.sum <- count(as.data.frame(LapPEP.fit$GammaSamples), vars = paste("V",1:5,sep=""))
+  #
+  # Count the unique models and their counts
+  map.1 <- pep.predict.model(mod1$GammaSamples,estimator = "HPM")
+  if(all(true.gam==map.1)){
+    map.count[r,c] <-1
+  }
+  c=c+1
+
+  print("----------------mod2------------")
+  mod2 <- Laplace.pep(X,y,nmc=5000,burn=2000, model.prior = "Uniform", hyper="TRUE", hyper.type="gamma",hyper.param=1)
+  map.2 <- pep.predict.model(mod2$GammaSamples,estimator = "HPM")
+  if(all(true.gam==map.2)){
+    map.count[r,c] <-1
+  }
+  c=c+1
+
+  print("----------------mod3------------")
+  mod3 <- Laplace.pep(X,y,nmc=5000,burn=2000, model.prior = "beta-binomial", hyper="TRUE", hyper.type="gamma",hyper.param=4)
+  map.3 <- pep.predict.model(mod3$GammaSamples,estimator = "HPM")
+  if(all(true.gam==map.3)){
+    map.count[r,c] <-1
+  }
+  c=c+1
+
+
+  print("----------------mod4------------")
+  mod4 <- Laplace.pep(X,y,nmc=5000,burn=2000, model.prior = "Uniform", hyper="TRUE", hyper.type="gamma",hyper.param=4)
+  map.4 <- pep.predict.model(mod4$GammaSamples,estimator = "HPM")
+  if(all(true.gam==map.4)){
+    map.count[r,c] <-1
+  }
+  c=c+1
+  print("----------------mod5------------")
+  mod5 <- Laplace.pep(X,y,nmc=5000,burn=2000, model.prior = "beta-binomial", hyper="TRUE", hyper.type="hyper-g/n",hyper.param=4)
+  map.5 <- pep.predict.model(mod5$GammaSamples,estimator = "HPM")
+  if(all(true.gam==map.5)){
+    map.count[r,c] <-1
+  }
+  c=c+1
+
+
+  print("----------------mod6------------")
+  mod6 <- Laplace.pep(X,y,nmc=5000,burn=2000, model.prior = "Uniform", hyper="TRUE", hyper.type="hyper-g/n",hyper.param=4)
+  map.6 <- pep.predict.model(mod6$GammaSamples,estimator = "HPM")
+  if(all(true.gam==map.6)){
+    map.count[r,c] <-1
+  }
+  c=c+1
+
+
+  # LASSO
+  lasso.fit <- cv.glmnet(X, y, family = "binomial")
+  lasso.mod <- (abs(coef(lasso.fit,s="lambda.min"))>0)[-1]
+  if(all(true.gam==lasso.mod)){
+    map.count[r,c] <-1
+  }
+  c=c+1
+
+  # UIP
+  UIP.fit <- bas.glm( y~ ., data=sim.data,method="BAS", family=binomial(link = "logit")
+                      ,betaprior = g.prior(n))
+  UIP.hpm <- predict(UIP.fit, estimator = "HPM")
+  UIP.hpm.mod <- colnames(X) %in%  variable.names(UIP.hpm)
+  if(all(true.gam==UIP.hpm.mod)){
+    map.count[r,c] <-1
+  }
+  c=c+1
+
+  # Hyper g
+  hyperg.fit <- bas.glm( y~ ., data=sim.data,method="BAS", family=binomial(link = "logit")
+                         ,betaprior = hyper.g(alpha=3))
+  hyperg.hpm <- predict(hyperg.fit, estimator = "HPM")
+  hyperg.hpm.mod <- colnames(X) %in%  variable.names(hyperg.hpm)
+  if(all(true.gam==hyperg.hpm.mod)){
+    map.count[r,c] <-1
+  }
+  c=c+1
+
+  # Hyper g/n alpha =3
+  hypergna3.fit <- bas.glm( y~ ., data=sim.data,method="BAS", family=binomial(link = "logit")
+                            ,betaprior = hyper.g.n(alpha=3,nrow(sim.data)))
+  hypergna3.hpm <- predict(hypergna3.fit, estimator = "HPM")
+  hypergna3.hpm.mod <- colnames(X) %in%  variable.names(hypergna3.hpm)
+  if(all(true.gam==hypergna3.hpm.mod)){
+    map.count[r,c] <-1
+  }
+  c=c+1
+
+  # Hyper g/n alpha =4 ; median is n
+  hypergn.fit <- bas.glm( y~ ., data=sim.data,method="BAS", family=binomial(link = "logit")
+                          ,betaprior = hyper.g.n(alpha=4,nrow(sim.data)))
+  hypergn.hpm <- predict(hypergn.fit, estimator = "HPM")
+  hypergn.hpm.mod <- colnames(X) %in%  variable.names(hypergn.hpm)
+  if(all(true.gam==hypergn.hpm.mod)){
+    map.count[r,c] <-1
+  }
+  c=c+1
+
+  # # CRPEP
+  # PEP.y.input <- cbind(rep(1,length(y)),y)
+  # crpep.fit <- gvs.crpep(PEP.y.input, X,iter=6000, discard = 1000, family = "binomial",
+  #                        n.star = length(y),hyper = FALSE)
+  # map.crpep <- pep.predict.model(crpep.fit$gammas,estimator = "HPM")
+  # if(all(true.gam==map.crpep)){
+  #   map.count[r,c] <-1
+  # }
+  # c=c+1
+  #
+  # #CRPEP - hyper g - GIVES ERROR RIGHT NOW
+  # crpep.hyperg.fit <- gvs.crpep(PEP.y.input, X,iter=6000, discard = 1000, family = "binomial",
+  #                               n.star = length(y),hyper = TRUE, hyper.type = "hyper-g")
+  # map.crpep.hyperg <- pep.predict.model(crpep.hyperg.fit$gammas,estimator = "HPM")
+  # if(all(true.gam==map.crpep.hyperg)){
+  #   map.count[r,c] <-1
+  # }
+  # c=c+1
+  #
+  #
+  # # CRPEP - hyper g/n
+  # crpep.hypergn.fit <- gvs.crpep(PEP.y.input, X,iter=6000, discard = 1000, family = "binomial",
+  #                                n.star = length(y),hyper = TRUE, hyper.type = "hyper-g/n")
+  # map.crpep.hypergn <- pep.predict.model(crpep.hypergn.fit$gammas,estimator = "HPM")
+  # if(all(true.gam==map.crpep.hypergn)){
+  #   map.count[r,c] <-1
+  # }
+  # c=c+1
+  #
+  #
+  #
+  # # DR PEP
+  # drpep.fit <- gvs.drpep(PEP.y.input, X,iter=6000, discard = 1000, family = "binomial",
+  #                        n.star = length(y),hyper = FALSE)
+  # map.drpep <- pep.predict.model(drpep.fit$gammas,estimator = "HPM")
+  # if(all(true.gam==map.drpep)){
+  #   map.count[r,c] <-1
+  # }
+  # c=c+1
+  #
+  # # DR PEP - hyper g
+  # drpep.hyperg.fit <- gvs.drpep(PEP.y.input, X,iter=6000, discard = 1000, family = "binomial",
+  #                               n.star = length(y),hyper = TRUE, hyper.type = "hyper-g")
+  # map.drpep.hyperg <- pep.predict.model(drpep.hyperg.fit$gammas,estimator = "HPM")
+  # if(all(true.gam==map.drpep.hyperg)){
+  #   map.count[r,c] <-1
+  # }
+  # c=c+1
+  #
+  #
+  #
+  # # DR PEP - hyper g/n
+  # drpep.hypergn.fit <- gvs.drpep(PEP.y.input, X,iter=6000, discard = 1000, family = "binomial",
+  #                                n.star = length(y),hyper = TRUE, hyper.type = "hyper-g/n")
+  # map.drpep.hypergn <- pep.predict.model(drpep.hypergn.fit$gammas,estimator = "HPM")
+  # if(all(true.gam==map.drpep.hypergn)){
+  #   map.count[r,c] <-1
+  # }
+  # c=c+1
+  print(colSums(map.count))
+}
+
+
+resultsFile = paste("results/","Scenario",i,"correlation",j,sep = "")
+
+res <- colSums(map.count)
+
+save(res, file = paste(resultsFile,"rda",sep = "."))
+
+

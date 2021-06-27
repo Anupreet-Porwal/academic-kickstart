@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1610677799306.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "109998049",
+    "id" : "3E51BEE",
+    "lastKnownWriteTime" : 1610688647,
+    "last_content_update" : 1610688647790,
+    "path" : "C:/Users/Anupreet Porwal/Dropbox/Research/PEP-GLM/code/main/simulation1_logistic_savdata_wPEP.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "59,0",
+        "scrollLine" : "46"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

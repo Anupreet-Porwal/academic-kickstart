@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1611104932491.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4147008145",
+    "id" : "FA74203E",
+    "lastKnownWriteTime" : 1610672702,
+    "last_content_update" : 1610672702,
+    "path" : "C:/Users/Anupreet Porwal/Dropbox/Research/BMA LASSO/code/BMA code/main/highdim_pred_110920.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "34,48",
+        "scrollLine" : "29"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
